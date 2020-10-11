@@ -3,21 +3,20 @@ package tn.touir.AutoShutdown;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import tn.touir.AutoShutdown.utils.ConfigurationKeys;
 import tn.touir.AutoShutdown.utils.ConfigurationUtils;
 
 public class AutoShutdown {
 
 	private static final String CONFIGURATION_FILE_PATH = "./config.ini";
-	private static final int LOOP_INTERVAL_MS = 60000;
 	
 	public static void main(String[] args) {
 		try {
 			
 			Map<String, String> config = ConfigurationUtils.readConfiguration(CONFIGURATION_FILE_PATH);
 			
-			for(Map.Entry<String, String> entry : config.entrySet()) {
-				System.out.println(entry.getKey() + " = " + entry.getValue());
-			}
+			int loopInterval = Integer.valueOf(config.get(ConfigurationKeys.LOOP_INTERVAL_MS));
+			String shutdownCommand = config.get(ConfigurationKeys.SHUTDOWN_COMMAND);
 			
 			LocalDateTime time = LocalDateTime.now();
 			int dayOfWeek = time.getDayOfWeek().getValue() % 7;
@@ -29,10 +28,14 @@ public class AutoShutdown {
 				
 				// hibernate
 				if(hour <= startHour || hour >= endHour) {
-					Runtime.getRuntime().exec("shutdown /h");
+					System.out.println("Setting windows on hibernate");
+					Runtime.getRuntime().exec(shutdownCommand);
+				}
+				else {
+					System.out.println("Windows is still on");
 				}
 				
-				Thread.sleep(LOOP_INTERVAL_MS);
+				Thread.sleep(loopInterval);
 			}
 			
 			

@@ -33,6 +33,10 @@ public class ConfigurationKeys {
 	public static final String SATURDAY_START = "DayOfWeek6_start";
 	public static final String SATURDAY_END = "DayOfWeek6_end";
 	
+	// schedule
+	public static final String LOOP_INTERVAL_MS = "CheckInterval_ms";
+	public static final String SHUTDOWN_COMMAND = "ShutdownCommand";
+	
 	public static int getOrder(String key) {
 		int result = 999;
 		switch(key) {
@@ -57,6 +61,8 @@ public class ConfigurationKeys {
 			case SATURDAY_ACTIVE : result = 19; break;
 			case SATURDAY_START : result = 20; break;
 			case SATURDAY_END : result = 21; break;
+			case LOOP_INTERVAL_MS : result = 22; break;
+			case SHUTDOWN_COMMAND : result = 23; break;
 		}
 		
 		return result;

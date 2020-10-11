@@ -93,6 +93,10 @@ public class ConfigurationUtils {
 		result.put(ConfigurationKeys.SATURDAY_START, "06");
 		result.put(ConfigurationKeys.SATURDAY_END, "13");
 		
+		// schedule
+		result.put(ConfigurationKeys.SHUTDOWN_COMMAND, "shutdown /h");
+		result.put(ConfigurationKeys.LOOP_INTERVAL_MS, "60000");
+		
 		return result;
 	}
 	
