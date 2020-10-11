@@ -5,6 +5,8 @@ import java.util.Map;
 
 import tn.touir.AutoShutdown.utils.ConfigurationKeys;
 import tn.touir.AutoShutdown.utils.ConfigurationUtils;
+import tn.touir.AutoShutdown.utils.DateTimeApi.DateTime;
+import tn.touir.AutoShutdown.utils.DateTimeApi.DateTimeAPI;
 
 public class AutoShutdown {
 
@@ -22,9 +24,27 @@ public class AutoShutdown {
 			int dayOfWeek = time.getDayOfWeek().getValue() % 7;
 			int hour = time.getHour();
 			
+			try {
+				
+			}
+			catch(Exception e) {
+				
+			}
+			
 			while(true) {
 				int startHour = ConfigurationUtils.getStartHour(dayOfWeek, config);
 				int endHour = ConfigurationUtils.getEndHour(dayOfWeek, config);
+				
+				try {
+					DateTime dateTime = DateTimeAPI.getDateTime();
+					dayOfWeek = dateTime.getDayOfWeek();
+					hour = dateTime.getHour();
+					
+					System.out.println(dateTime);
+				}
+				catch(Exception e) {
+					// nothing to do
+				}
 				
 				// hibernate
 				if(hour <= startHour || hour >= endHour) {
