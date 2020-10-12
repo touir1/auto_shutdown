@@ -1,2 +1,2 @@
 @echo off
-java -jar AutoShutdown.jar
+"jre/bin/java.exe" -jar AutoShutdown.jar
