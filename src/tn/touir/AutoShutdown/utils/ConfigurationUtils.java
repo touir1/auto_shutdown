@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +19,7 @@ public class ConfigurationUtils {
 		
 		File configurationFile = new File(configurationFilePath);
 		if(configurationFile.exists()) {
+			System.out.println("reading config file under :"+configurationFile.getAbsolutePath());
 			List<String> fileContent = readLineByLine(configurationFilePath);
 			for(String line : fileContent) {
 				String[] keyValuePair = line.split("=");
@@ -27,6 +27,7 @@ public class ConfigurationUtils {
 			}
 		}
 		else {
+			System.out.println("file does not exists");
 			configurationFile.createNewFile();
 			FileWriter writer = new FileWriter(configurationFilePath);
 			result.putAll(getInitialConfiguration());
